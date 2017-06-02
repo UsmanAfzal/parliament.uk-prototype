@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://localhost:3030/resource/7TX8ySd4
+    uri: http://localhost:3030/resource_url
     body:
       encoding: US-ASCII
       string: ''
@@ -36,10 +36,10 @@ http_interactions:
       X-Powered-By:
       - ASP.NET
       Date:
-      - Fri, 02 Jun 2017 10:34:34 GMT
+      - Fri, 02 Jun 2017 15:30:46 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 02 Jun 2017 10:35:13 GMT
+  recorded_at: Fri, 02 Jun 2017 15:31:25 GMT
 recorded_with: VCR 3.0.3
