@@ -232,6 +232,14 @@ Rails.application.routes.draw do
     lookupable('houses#lookup_by_letters')
   end
 
+  ## Resource
+  # /resource/
+  scope '/resource', as: 'resource' do
+    get '/', to: 'resource#index'
+    scope '/:resource_id' do
+      get '/', to: 'resource#show', resource_id: id_format_regex
+    end
+  end
 
   ## Meta ##
   # /meta
