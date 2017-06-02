@@ -13,17 +13,27 @@ RSpec.describe ResourceController, vcr: true do
   end
 
   describe 'GET grom nodes' do
+    context 'successfully' do
+      before(:each) do
+        get :show, params: { resource_id: '7TX8ySd4' }
+      end
 
-    before(:each) do
-      get :show, params: { resource_id: '7TX8ySd4' }
-    end
-
-    it 'assigns @nodes' do
-      assigns(:nodes).each do |node|
-        expect(node).to be_a(Grom::Node)
+      it 'assigns @nodes if grom nodes can be found' do
+        assigns(:nodes).each do |node|
+          expect(node).to be_a(Grom::Node)
+        end
       end
     end
 
+    context 'unsuccessfully' do
+      before(:each) do
+        get :show, params: { resource_id: '12345678' }
+      end
+
+      it 'raises error if no grom nodes can be found (404)' do
+        expect(response).not_to have_http_status(:ok)
+      end
+    end
   end
 
 
