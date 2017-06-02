@@ -7,9 +7,8 @@ class ResourceController < ApplicationController
     resource_id = params[:resource_id]
     resource_url = "resources?uri=http://id.ukpds.org/#{resource_id}"
 
-    @nodes = RequestHelper.filter_response_data(
+    @nodes = RequestHelper.process_available_letters(
       parliament_request.resource_url
-      'http://id.ukpds.org/schema/Resource'
     )
 
     # If 404, raise error
