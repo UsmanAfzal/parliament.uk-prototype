@@ -1,7 +1,7 @@
 module ResourceHelper
 
   ACCEPTABLE_OBJECT_TYPES = {
-    Person: 'people_path'
+    PimsPerson: 'people'
   }
 
   def self.get_object_type(node_type)

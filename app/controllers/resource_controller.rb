@@ -7,22 +7,29 @@ class ResourceController < ApplicationController
     resource_id = params[:resource_id]
     resource_url = "resources?uri=http://id.ukpds.org/#{resource_id}"
 
-    @nodes = RequestHelper.process_available_letters(
-      parliament_request.resource_url
-    )
+    begin
+      @results = parliament_request.resources.get(params: { uri: "http://id.ukpds.org/#{resource_id}" })
 
     # If 404, raise error
+    rescue Parliament::NoContentResponseError => error
+      raise ActionController::RoutingError, error.message
+    end
 
-    # If 200, do the below
-
-    # find the first node_type
-    # @nodes.first.type
+    # Find the first node_type
+    type = @results.first.type.split('/').last.to_sym
 
     # use ResourceHelper.check_acceptable_object_type to get route people_path
-      # if there is a route, redirect
-        # Rails.application.routes.url_helpers.send("people_path")
+    path = ResourceHelper.check_acceptable_object_type(type)
 
-      # else output table of data
+    # if there is a route, redirect
+    unless path.nil?
+      redirect_to "/#{path}/#{resource_id}"
+    end
+
+
+    # else output table of data
+
+
 
   end
 
