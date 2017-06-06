@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://localhost:3030/resource_url
+    uri: http://localhost:3030/resources?uri=http://id.ukpds.org/12345678
     body:
       encoding: US-ASCII
       string: ''
@@ -18,8 +18,8 @@ http_interactions:
       - "<AUTH_TOKEN>"
   response:
     status:
-      code: 400
-      message: Bad Request
+      code: 404
+      message: Not Found
     headers:
       Cache-Control:
       - no-cache
@@ -36,10 +36,10 @@ http_interactions:
       X-Powered-By:
       - ASP.NET
       Date:
-      - Fri, 02 Jun 2017 15:30:46 GMT
+      - Mon, 05 Jun 2017 14:28:15 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 02 Jun 2017 15:31:25 GMT
+  recorded_at: Mon, 05 Jun 2017 14:28:58 GMT
 recorded_with: VCR 3.0.3
