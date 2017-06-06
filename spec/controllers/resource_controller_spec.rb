@@ -25,7 +25,7 @@ RSpec.describe ResourceController, vcr: true do
       end
 
       it 'redirects to people path' do
-        expect(response).to be_redirect
+        expect(response).to redirect_to(person_path('xP2kB45W'))
       end
     end
 
