@@ -12,23 +12,23 @@ RSpec.describe ResourceHelper do
 
   context 'acceptable object types' do
     it 'includes Person' do
-      expect(ResourceHelper::ACCEPTABLE_OBJECT_TYPES[:Person]).to eq('people_path')
+      expect(ResourceHelper::ACCEPTABLE_OBJECT_TYPES[:PimsPerson]).to eq('people')
     end
   end
 
   context 'checking for acceptable object type' do
 
     before(:each) do
-      @node_type = 'http://id.ukpds.org/schema/Person'
+      @node_type = 'http://id.ukpds.org/schema/PimsPerson'
     end
 
     it 'should extract object type from url' do
-      expect(ResourceHelper.get_object_type(@node_type)).to eq(:Person)
+      expect(ResourceHelper.get_object_type(@node_type)).to eq(:PimsPerson)
     end
 
     it 'should return route if node type is an acceptable object type' do
       @node_type = ResourceHelper.get_object_type(@node_type)
-      expect(ResourceHelper.check_acceptable_object_type(@node_type)).to eq('people_path')
+      expect(ResourceHelper.check_acceptable_object_type(@node_type)).to eq('people')
     end
 
     it 'should return nil if node type is not an acceptable object type' do
