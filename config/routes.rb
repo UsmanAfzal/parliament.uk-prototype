@@ -236,7 +236,9 @@ Rails.application.routes.draw do
   # /resource/
   scope '/resource', as: 'resource' do
     get '/', to: 'resource#index'
+    get 'lookup', to: 'resource#lookup'
     scope '/:resource_id' do
+      # /resource/:resource_id
       get '/', to: 'resource#show', resource_id: id_format_regex
     end
   end
