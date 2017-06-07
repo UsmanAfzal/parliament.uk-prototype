@@ -1,7 +1,11 @@
 module ResourceHelper
 
   ACCEPTABLE_OBJECT_TYPES = {
-    PimsPerson: 'people'
+    PimsPerson: 'people',
+    House: 'houses',
+    PastConstituencyGroup: 'constituencies',
+    OnsConstituencyGroup: 'constituencies',
+    MnisParty: 'parties'
   }
 
   def self.get_object_type(node_type)
