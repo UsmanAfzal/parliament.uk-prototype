@@ -1,9 +1,11 @@
 class ResourceController < ApplicationController
 
   def index
+    @results = session[:results]
+    session[:results] = nil
   end
 
-  def lookup
+  def show
     resource_id = params[:resource_id]
     resource_uri = "http://id.ukpds.org/#{resource_id}"
 
@@ -21,19 +23,23 @@ class ResourceController < ApplicationController
     path = ResourceHelper.check_acceptable_object_type(type)
 
     # if there is a route, redirect, else output table of data
-    # path.nil? ? render :show : redirect_to "/#{path}/#{resource_id}"
-
+    # path.nil? ? render : redirect_to "/#{path}/#{resource_id}"
     unless path.nil?
       redirect_to "/#{path}/#{resource_id}"
     else
-      render :show
+      @statements = ResourceHelper.produce_statements(@results)
+      p @statements.first
+      # @statements = []
+      # @results.each do |result|
+      #   result.statements.each do |statement|
+      #     @statements << statement.to_a
+      #   end
+      # end
+      render
     end
 
   end
 
-  def show
-
-  end
 
 
 end
