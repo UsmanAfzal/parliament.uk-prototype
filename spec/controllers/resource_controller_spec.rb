@@ -15,7 +15,7 @@ RSpec.describe ResourceController, vcr: true do
   describe 'GET grom nodes' do
     context 'successfully' do
       before(:each) do
-        get :lookup, params: { resource_id: 'xP2kB45W' }
+        get :show, params: { resource_id: 'xP2kB45W' }
       end
 
       it 'assigns @results if grom nodes can be found' do
@@ -27,7 +27,7 @@ RSpec.describe ResourceController, vcr: true do
 
     context 'unsuccessfully' do
       it 'raises error if no grom nodes can be found (404)' do
-        expect{get :lookup, params: { resource_id: '12345678' }}.to raise_error(ActionController::RoutingError)
+        expect{get :show, params: { resource_id: '12345678' }}.to raise_error(ActionController::RoutingError)
       end
     end
   end
@@ -35,7 +35,7 @@ RSpec.describe ResourceController, vcr: true do
   describe 'Handling response' do
     context 'when a route exits' do
       before(:each) do
-        get :lookup, params: { resource_id: 'xP2kB45W' }
+        get :show, params: { resource_id: 'xP2kB45W' }
       end
 
       it 'redirects to correct path' do
@@ -45,7 +45,7 @@ RSpec.describe ResourceController, vcr: true do
 
     context 'when no route exists' do
       before(:each) do
-        get :lookup, params: { resource_id: 'sYpq0s7D' }
+        get :show, params: { resource_id: 'sYpq0s7D' }
       end
 
       it 'renders the show template' do

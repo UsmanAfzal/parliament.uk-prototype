@@ -37,6 +37,25 @@ RSpec.describe ResourceHelper do
     end
   end
 
+  context 'producing statements for view' do
+
+    before(:each) do
+      results = {
+        result: {
+          statements: {
+            { 'subject1', 'predicate1', 'object1' } ,
+            { 'subject2', 'predicate2', 'object2' }
+          }
+        }
+      }
+    end
+
+    it 'produces an array of single statements' do
+      expect(ResourceHelper.produce_statements(results)).to eq([ ['subject1', 'predicate1', 'object1'], ['subject2', 'predicate2', 'object2'] ])
+    end
+
+  end
+
 
 
 
