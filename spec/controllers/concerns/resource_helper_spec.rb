@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ResourceHelper do
+RSpec.describe ResourceHelper, vcr: true do
 
   it 'is a module' do
     expect(ResourceHelper).to be_a(Module)
@@ -40,18 +40,14 @@ RSpec.describe ResourceHelper do
   context 'producing statements for view' do
 
     before(:each) do
-      results = {
-        result: {
-          statements: {
-            { 'subject1', 'predicate1', 'object1' } ,
-            { 'subject2', 'predicate2', 'object2' }
-          }
-        }
-      }
+      resource_uri = "http://id.ukpds.org/sYpq0s7D"
+      @results = ParliamentHelper.parliament_request.resources.get(params: { uri: resource_uri })
     end
 
     it 'produces an array of single statements' do
-      expect(ResourceHelper.produce_statements(results)).to eq([ ['subject1', 'predicate1', 'object1'], ['subject2', 'predicate2', 'object2'] ])
+      expect(ResourceHelper.produce_statements(@results)).to be_a(Array)
+      expect(ResourceHelper.produce_statements(@results)[0]).to be_a(Array)
+      expect(ResourceHelper.produce_statements(@results).count).to eq(15)
     end
 
   end
